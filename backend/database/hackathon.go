@@ -24,6 +24,15 @@ func GetHackathons() ([]*model.Hackathon, error) {
 	return hackathons, nil
 }
 
+func GetApprovedHackathons() ([]*model.Hackathon, error) {
+	hackathons := []*model.Hackathon{}
+	err := db.Select(&hackathons, "SELECT * FROM hackathons WHERE approved=true ORDER BY id")
+	if err != nil {
+		return nil, err
+	}
+	return hackathons, nil
+}
+
 func SaveHackathon(h *model.Hackathon) error {
 	if h.ID == 0 {
 		h.Created = time.Now()

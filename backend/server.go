@@ -7,6 +7,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/zachlatta/hackwatch/backend/database"
+	"github.com/zachlatta/hackwatch/backend/handler"
 )
 
 const (
@@ -52,6 +53,9 @@ func main() {
 	defer database.Close()
 
 	r := mux.NewRouter()
+
+	r.Handle("/hackathons",
+		handler.AppHandler(handler.GetApprovedHackathons)).Methods("GET")
 
 	http.Handle("/", r)
 	http.ListenAndServe(":"+port, httpLog(http.DefaultServeMux))

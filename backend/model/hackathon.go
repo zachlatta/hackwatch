@@ -18,7 +18,7 @@ var (
 
 var (
 	regexpURL     = regexp.MustCompile(`/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/`)
-	regexpTwitter = regexp.MustCompile(`(?<=^|(?<=[^a-zA-Z0-9-_\.]))@([A-Za-z]+[A-Za-z0-9]+)`)
+	regexpTwitter = regexp.MustCompile(`/@([A-Za-z0-9_]{1,15})/`)
 )
 
 type Hackathon struct {
