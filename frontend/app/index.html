@@ -24,7 +24,37 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container" ng-view=""></div>
+    <div class="off-canvas-wrap">
+      <div class="inner-wrap">
+        <nav class="top-bar hide-for-small" data-topbar>
+          <ul class="title-area">
+            <li class="name">
+              <h1 class="title"><a href="/">Hack Watch</a></h1>
+            </li>
+          </ul>
+          <section class="top-bar-section">
+            <ul class="right">
+              <ng-include src="'partials/nav.html'">
+            </ul>
+          </section>
+        </nav>
+        <nav class="tab-bar show-for-small">
+          <section class="left-small">
+            <a class="left-off-canvas-toggle menu-icon"><span></span></a>
+          </section>
+          <section class="middle tab-bar-section">
+            <h1 class="title">Hack Watch</h1>
+          </section>
+        </nav>
+        <aside class="left-off-canvas-menu">
+          <ul class="off-canvas-list">
+            <li><label>Navigation</label></li>
+            <ng-include src="'partials/nav.html'"></ng-include>
+          </ul>
+        </aside>
+        <div ng-view autoscroll></div>
+      </div>
+    </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -50,6 +80,7 @@
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-foundation/mm-foundation-tpls.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
