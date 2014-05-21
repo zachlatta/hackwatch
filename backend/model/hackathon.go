@@ -13,6 +13,7 @@ var (
 	ErrInvalidWebsite  = errors.New("invalid website")
 	ErrInvalidTwitter  = errors.New("invalid twitter")
 	ErrInvalidFacebook = errors.New("invalid facebook")
+	ErrInvalidDate     = errors.New("invalid date")
 	ErrInvalidLocation = errors.New("invalid location")
 )
 
@@ -60,6 +61,8 @@ func (h *Hackathon) validate() error {
 		return ErrInvalidWebsite
 	case len(h.Location) == 0 || len(h.Location) > 255:
 		return ErrInvalidLocation
+	case h.Date.Equal(time.Time{}): // if user didn't supply date
+		return ErrInvalidDate
 	}
 
 	if len(h.Twitter) > 0 {
