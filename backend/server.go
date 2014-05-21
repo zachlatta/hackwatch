@@ -6,6 +6,15 @@ import (
 	"os"
 
 	"github.com/gorilla/mux"
+	"github.com/zachlatta/hackwatch/backend/database"
+)
+
+const (
+	Environment         = "BACKEND_ENV"
+	Production          = "PRODUCTION"
+	ProductionDatabase  = "DATABASE_URL"
+	DevelopmentDatabase = "postgres://docker:docker@$DB_1_PORT_5432_TCP_ADDR/docker"
+	databaseDriver      = "postgres"
 )
 
 func httpLog(handler http.Handler) http.Handler {
@@ -20,6 +29,27 @@ func main() {
 	if port == "" {
 		port = "3000"
 	}
+
+	production := os.Getenv(Environment) == Production
+
+	if production {
+		databaseURL := os.Getenv(ProductionDatabase)
+
+		if databaseURL == "" {
+			log.Fatal(ProductionDatabase + " is empty")
+		}
+
+		err := database.Init(databaseDriver, databaseURL)
+		if err != nil {
+			panic(err)
+		}
+	} else {
+		err := database.Init(databaseDriver, os.ExpandEnv(DevelopmentDatabase))
+		if err != nil {
+			panic(err)
+		}
+	}
+	defer database.Close()
 
 	r := mux.NewRouter()
 
