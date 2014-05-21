@@ -6,6 +6,8 @@ import (
 	"io"
 	"regexp"
 	"time"
+
+	"github.com/jasonmoo/geo"
 )
 
 var (
@@ -50,7 +52,23 @@ func NewHackathon(jsonReader io.Reader) (*Hackathon, error) {
 		return nil, err
 	}
 
+	if err := hackathon.Geocode(); err != nil {
+		return nil, err
+	}
+
 	return &hackathon, nil
+}
+
+func (h *Hackathon) Geocode() error {
+	address, err := geo.Geocode(h.Location)
+	if err != nil {
+		return err
+	}
+
+	h.Latitude = address.Lat
+	h.Longitude = address.Lng
+
+	return nil
 }
 
 func (h *Hackathon) validate() error {
