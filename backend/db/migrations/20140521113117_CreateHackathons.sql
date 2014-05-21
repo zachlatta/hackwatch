@@ -8,6 +8,7 @@ CREATE TABLE hackathons (
   website text not null,
   twitter text not null,
   facebook text not null,
+  date timestamp not null,
   location text not null,
   latitude text not null,
   longitude text not null,

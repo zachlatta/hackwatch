@@ -55,6 +55,8 @@ func main() {
 	r := mux.NewRouter()
 
 	r.Handle("/hackathons",
+		handler.AppHandler(handler.NewHackathon)).Methods("POST")
+	r.Handle("/hackathons",
 		handler.AppHandler(handler.GetApprovedHackathons)).Methods("GET")
 
 	http.Handle("/", r)
