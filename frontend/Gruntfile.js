@@ -147,7 +147,16 @@ module.exports = function (grunt) {
     bowerInstall: {
       app: {
         src: ['<%= yeoman.app %>/index.html'],
-        ignorePath: '<%= yeoman.app %>/'
+        ignorePath: '<%= yeoman.app %>/',
+        exclude: [
+          'bower_components/modernizr/modernizer.js',
+          'bower_components/jquery/dist/jquery.js',
+          'bower_components/fastclick/lib/fastclick.js',
+          'bower_components/jquery.cookie/jquery.cookie.js',
+          'bower_components/jquery-placeholder/jquery.placeholder.js',
+          'bower_components/foundation/js/foundation.js',
+          'bower_components/foundation/css/foundation.css'
+        ]
       },
       sass: {
         src: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
@@ -164,7 +173,10 @@ module.exports = function (grunt) {
         imagesDir: '<%= yeoman.app %>/images',
         javascriptsDir: '<%= yeoman.app %>/scripts',
         fontsDir: '<%= yeoman.app %>/styles/fonts',
-        importPath: '<%= yeoman.app %>/bower_components',
+        importPath: [
+          '<%= yeoman.app %>/bower_components',
+          '<%= yeoman.app %>/bower_components/foundation/scss'
+        ],
         httpImagesPath: '/images',
         httpGeneratedImagesPath: '/images/generated',
         httpFontsPath: '/styles/fonts',
