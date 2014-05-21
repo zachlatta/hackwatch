@@ -58,6 +58,8 @@ func main() {
 		handler.AppHandler(handler.NewHackathon)).Methods("POST")
 	r.Handle("/hackathons",
 		handler.AppHandler(handler.GetApprovedHackathons)).Methods("GET")
+	r.Handle("/hackathons/{id}/approve",
+		handler.AppHandler(handler.ApproveHackathon)).Methods("POST")
 
 	http.Handle("/", r)
 	http.ListenAndServe(":"+port, httpLog(http.DefaultServeMux))
